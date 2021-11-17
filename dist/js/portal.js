@@ -956,7 +956,7 @@ var app = {
     checkEmpty: function(){
         
         $(".dynamicWidgets .column").each(function(){
-            if($(this).children().length){
+            if($(this).find(".portlet").length){
                 // cool
                 $(this).removeClass("empty")
             } else {
@@ -968,8 +968,13 @@ var app = {
             if($(this).find(".portlet").length>1){
                 console.log("double");
                 let $empty = $(".dynamicWidgets .column.empty");
-                $(this).find(".portlet:last-child").detach().appendTo($empty);
-                app.checkEmpty();
+                
+                
+                let $node =$(this).find(".portlet:nth-child(" + $(this).find(".portlet").length + ")")
+                console.log("nodes", $(this).find(".portlet").length, $node);
+                
+                $node.detach().appendTo($empty);
+                $empty.removeClass("empty");
             }
         });
 
@@ -1364,25 +1369,33 @@ var app = {
 
     },
     initResizing: function(){
-       
+        let colHeight = 432;
+        // loop each one once we can change height
+        $(".dynamicWidgets .column:not(.widget_Quote)").resizable({
+            grid: $(window).width() / 12,
+            helper: "resizable-helper",
+            ghost: false,
+            maxHeight: colHeight + "px",
+            minHeight: colHeight + "px",
+            resize: function(event, ui){
+                let el = ui.element;
+                
+                let gridVal = app.getClosestGridSnap(event.clientX);
+                console.log(gridVal, "new gridVal")
+                event.target.setAttribute("data-w", gridVal)
+            }
+
+        });
 
     },
     
     initDragging: function () {
 
-        
-        /*$(".dynamicWidgets .column").resizable({
-            grid: 50,
-            helper: "resizable-helper"
-        });
-        */
-        
-
         $(".column").sortable({
             connectWith: ".column",
             handle: ".portlet-header",
             scroll: true,
-            tolerance: "20%",
+            tolerance: "pointer",
             remove: function (event, ui) {
                 //ui.item.clone().appendTo('#sortable2');
                 //$(this).sortable('cancel');
@@ -1406,6 +1419,15 @@ var app = {
         app.draggableClassInit();
 
        
+    },
+    
+    getClosestGridSnap:function(val){
+        let wid = $(window).width();
+        let unit = wid/12;
+        let cal = val/unit;
+        let gridVal = Math.ceil(cal);
+        return gridVal;
+
     },
     
     animateTimerArr: {},
@@ -1783,6 +1805,11 @@ var app = {
         if(dragging){
             app.initDragging();
             $("body").addClass("dragBody")
+        }
+        if(resizing){
+            document.querySelector(".dynamicWidgets").classList.add("resizable")
+            app.initResizing()
+
         }
     
     },

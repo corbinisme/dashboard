@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Corbin Rose Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="asset/img/goat2.png" />
+    <link rel="icon" type="image/x-icon" href="dist/img/goat2.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -182,6 +182,7 @@ var layout = [
         let animateNumbersBool = true;
         let animateWidgets = true;
         let dragging = true;
+        let resizing = true;
         const appNames = {
             corbin: "Corbin's Dashboard",
             
