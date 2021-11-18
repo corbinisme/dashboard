@@ -1010,7 +1010,9 @@ var app = {
            app.currentPage = thisId;
            pageID = thisId;
            app.initLayout(thisId);
+           $(document).scrollTop(0);
            
+           document.querySelector(".navbar-toggler").trigger("click")
         });
         
 
