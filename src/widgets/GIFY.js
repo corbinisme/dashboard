@@ -1,18 +1,22 @@
-const API_Gify = 'https://api.giphy.com/v1/gifs/trending?offset=0&amp;api_key=Gc7131jiJuvI7IdN0HZ1D7nh0ow5BU6g&amp;pingback_id=17b3155e0d643838';
+const API_Gify = 'https://api.giphy.com/v1/gifs/trending?api_key=Gc7131jiJuvI7IdN0HZ1D7nh0ow5BU6g&pingback_id=17b3155e0d643838&offset=0';
 var GIFY= {
     meta: {
         column: "col-lg-6 col-md-12"
     },
+    template: "carousel",
     state: {
       size: 500,
       dom: null,
+      start: 1,
+      stop: 2,
+      max: 1,
       header: {
           items: [
             
 			
           ]
       },
-      currentData:"loading",
+      currentData:[],
       
       height: 300,
     },
@@ -38,12 +42,20 @@ var GIFY= {
         $(GIFY.state.dom).html("<i class='fa fa-spinner fa-spin'></i>");
         $.ajax({
             url: API_Gify,
-            success: function (html) {
-                //console.log("gify", html);
-                let $temp = $(document.createElement("div"));
-                $temp.html(html);
+            success: function (json) {
+     
+                json.data.forEach(function(item){
 
-                GIFY.state.currentData = html;
+                    let desc = `<img src='${item.images.downsized_large.url}' />`;
+                    
+                    let temp = {
+                        title: item.title,
+                        description: desc,
+                        guid: item.url
+                    }
+                    GIFY.state.currentData.push(temp)
+                })
+                //GIFY.state.currentData = json;
                 GIFY.render();
             },error: function(e){
 
@@ -56,9 +68,13 @@ var GIFY= {
     },
     render: function(){
         var $node = $(GIFY.state.dom);
-        let stringy = `load this`;
-        console.log(GIFY.state.currentData)
-        $node.html(stringy)
+        let stringy = app.widgetLayouts.carouselVideo(GIFY.state.currentData, {
+            title: "GIFY",
+            show: 3, 
+            fields: ["title", "description", "link"]
+        })
+        
+        $node.html(stringy);
     }
 }
 

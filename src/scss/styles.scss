@@ -153,6 +153,36 @@ body {
             }
         }
     }
+    &.widget_NineGag {
+        .rss_video_wrap {
+            >* {
+                max-width: 100%;
+                margin: auto;
+                max-height: 100%;
+            
+            }
+        }
+    }
+    &.widget_Todo {
+        background-image: url("../img/table.jpg");
+        background-size: cover;
+        .card-header {
+            background: rgba(175, 119, 45, 0.8);
+        }
+        .card-body {
+            display: grid;
+            align-items: center;
+            background: rgba(0,0,0,0.5);
+            text-align:center;
+
+        .random {
+            display: inline-block;
+            font-size: 2em;
+            margin: auto;
+            padding: .375em .75em;
+        }
+    }
+    }
 }
 
 
@@ -230,6 +260,12 @@ footer {
                 &[data-w="10"] {width: 83.333333%;flex: 1 83.333333%; max-width: 83.333333%;}
                 &[data-w="11"] {width: 91.666667%;flex: 1 91.666667%; max-width: 91.666667%;}
                 &[data-w="12"] {width: 100%;flex: 1 100%; max-width: 100%;}
+
+                &[data-h="1"]{min-height: 100px;}
+                &[data-h="2"]{min-height: 200px;}
+                &[data-h="3"]{min-height: 300px;}
+                &[data-h="4"]{min-height: 400px;}
+                &[data-h="5"]{min-height: 500px;}
             }
         }
     

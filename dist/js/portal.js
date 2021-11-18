@@ -178,34 +178,12 @@ var helpers = {
     },
 }
 
-
-var globals = {
-    MONTHS: [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December'
-    ],
-}
-
-
 let layoutTemplates = [
     {name: "dashboard", page: "dashboard", desc: "Default widgets saving space", code:  ["Quote", "Good", "Happy", "Fun", "Dadjokes", "BibleVOD", "AM","Epic", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "PhotoNatgeo",   "PhotoNasa", "News", "Todo", "Instagram", "Facts", "DailyFacts", "GoodNewsHuff", "Buzzfeed", "HealthGazette","ExcellentTown", "BeautifulMess", "DailyGood", "Icr", "Lifehacker" ]},
     {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD",  "PhotoNasa",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood" ]},
-    {name:"learn", page: "learn", desc: "", code: ["Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr", "HealthGazette", "ExcellentTown|col-sm-8", "AM", "CSSTricks", "PhotoNatgeo", "Britannica" ]},
-    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "NineGag", "Todo|col-sm-4", "BoredPanda|col-sm-12", ,"Buzzfeed",  ]},
-
-
+    {name:"learn", page: "learn", desc: "", code: ["Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr", "HealthGazette", "ExcellentTown", "AM", "CSSTricks", "PhotoNatgeo", "Britannica" ]},
+    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "NineGag", "Todo|col-sm-4", "BoredPanda|col-sm-12", ,"Buzzfeed", "Epic", "GIFY|col-sm-4", "CorbinBlog|col-sm-4"  ]},
 ];
-
 
 const allWidgets = ["Good", "Happy", "Instagram","BibleVOD", "AM","Epic","Todo", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "Sheets"];
 
@@ -312,8 +290,6 @@ var app = {
     getPreviews: function(title){
 
         let node = document.querySelector(".widget_"+title);
-
-        node.style.display = "block";
         node.querySelectorAll(".item").forEach(function(item){
 
             let a = item.querySelector(".rss_heading a");
@@ -321,23 +297,6 @@ var app = {
             let img = item.querySelector(".rss_image");
             let origSrc = img.getAttribute("src");
             if(origSrc=="undefined" || origSrc == null || origSrc == ""){
-                /*
-                let url = "https://api.linkpreview.net/?key=" + app.screenShotKey + "&q=" + href;
-                
-                $.ajax({
-                    url: url,
-                    success: function(json){
-
-                        let src = json.image;
-                        
-                        img.setAttribute("src", src);
-                    },
-                    error: function(e){
-                        console.log(e);
-                    }
-                })
-                */
-               //limited
 
                // ajax a curl call of the link and find meta?
                $.ajax({
@@ -386,12 +345,9 @@ var app = {
                                         temp["image"] = image;
                                     }
                                 } else {
-                                
-                                    
-                                        
-                                
+
                                     if(options.fields == "all"){
-                                        //console.log(options.title, this.localName, this.innerHTML, this)
+                                       
                                         temp[this.localName] = app.removeCdata(app.htmlDecode($(this).html()));
                                         
                                     }
@@ -479,13 +435,9 @@ var app = {
     },
     widgetLayouts: {
         carousel: function(data, options){
-
-            
             let title = options.title;
             let widgetObj = window[title];
 
-            
-            
             let start = widgetObj.state.start;
             let stop = widgetObj.state.stop;
             var $rss = $(document.createElement("div"));
@@ -495,8 +447,6 @@ var app = {
             window[title].state.currentData.forEach(function (el, idx) {
                 let img = "";
 
-
-               
                 var zeroIndex = idx+1;
                 if (zeroIndex >= start && zeroIndex < stop) {
                    var $item = $(document.createElement("div"));
@@ -523,14 +473,10 @@ var app = {
            return $rss.html();
 
         },
-        photocarousel: function(data, options){
-
-            
+        carouselVideo: function(data, options){
             let title = options.title;
             let widgetObj = window[title];
 
-            
-            
             let start = widgetObj.state.start;
             let stop = widgetObj.state.stop;
             var $rss = $(document.createElement("div"));
@@ -540,8 +486,45 @@ var app = {
             window[title].state.currentData.forEach(function (el, idx) {
                 let img = "";
 
+                var zeroIndex = idx+1;
+                if (zeroIndex >= start && zeroIndex < stop) {
+                   var $item = $(document.createElement("div"));
 
+                   let image = "";
+                   
+
+                   $item.addClass("col item");
+                   var temp = `<div class='rss_video_wrap'>
+                        ${el.description}
+                    </div>
+                    <span class='rss_heading'>
+                        <a href='${el.guid}' target='_blank'>${el.title}</a></span>
+                    `;
+                   $item.html(temp);
+                   $ul.append($item);
+                }
                
+           });
+           $rss.append($ul);
+
+           return $rss.html();
+
+        },
+        photocarousel: function(data, options){
+
+            
+            let title = options.title;
+            let widgetObj = window[title];
+
+            let start = widgetObj.state.start;
+            let stop = widgetObj.state.stop;
+            var $rss = $(document.createElement("div"));
+            var $ul = $(document.createElement("div"));
+
+            $ul.addClass("rss_list row");
+            window[title].state.currentData.forEach(function (el, idx) {
+                let img = "";
+
                 var zeroIndex = idx+1;
                 if (zeroIndex >= start && zeroIndex < stop) {
                    var $item = $(document.createElement("div"));
@@ -571,12 +554,9 @@ var app = {
         },
         carouselContent: function(data, options){
 
-            
             let title = options.title;
             let widgetObj = window[title];
 
-            
-            
             let start = widgetObj.state.start;
             let stop = widgetObj.state.stop;
             var $rss = $(document.createElement("div"));
@@ -586,8 +566,6 @@ var app = {
             window[title].state.currentData.forEach(function (el, idx) {
                 let img = "";
 
-
-               
                 var zeroIndex = idx+1;
                 if (zeroIndex >= start && zeroIndex < stop) {
                    var $item = $(document.createElement("div"));
@@ -751,7 +729,7 @@ var app = {
         let contentString = contents.join(",");
         let identifier = "widget_stacked_" + contents.join("_");
         let colClass= size;
-        let str = `<div class='column ${colClass}'>
+        let str = `<div class='column ${colClass}' data-h='4'>
         <div class='portlet widget_stacked_container ${identifier}' data-contents="${contentString}">`;
         contents.forEach(function(w){
             str += `<div class="placeholder" data-widget="${w}"></div>`;
@@ -875,9 +853,22 @@ var app = {
         window.setTimeout(function () {
             app.initSettings();
             app.initModals();
+
             pageID = "good";
-            app.initLayout("good");
-            
+            if(helpers.getLocalStorage("currentPage")){
+                pageID = helpers.getLocalStorage("currentPage")
+            }
+            console.log("loading", pageID)
+            app.initLayout(pageID);
+
+            //
+            document.querySelectorAll(".pageToggle").forEach(function(pa){
+                if(pa.getAttribute("data-page")==pageID){
+                    pa.classList.add("active");
+                } else {
+                    pa.classList.remove("active");
+                }
+            })
             
             app.initBinding();
             
@@ -944,10 +935,13 @@ var app = {
             $(this).attr("data-counter", counter);
             let title = $(this).attr("data-title");
             let template ="";
-            if(typeof window[title].template!="undefined"){
-                template = window[title].template;
+            if(window[title]!=null){
+                if(typeof window[title].template!="undefined"){
+                    template = window[title].template;
+                }
+            
+                $(this).attr("data-template", template)
             }
-            $(this).attr("data-template", template)
             counter++;
             
 
@@ -1011,8 +1005,8 @@ var app = {
            pageID = thisId;
            app.initLayout(thisId);
            $(document).scrollTop(0);
-           
-           document.querySelector(".navbar-toggler").trigger("click")
+           helpers.setLocalStorage("currentPage", thisId);
+           $(".navbar-toggler").trigger("click")
         });
         
 
@@ -1374,17 +1368,20 @@ var app = {
         let colHeight = 432;
         // loop each one once we can change height
         $(".dynamicWidgets .column:not(.widget_Quote)").resizable({
-            grid: $(window).width() / 12,
+            //grid: $(window).width() / 12,
             helper: "resizable-helper",
             ghost: false,
             maxHeight: colHeight + "px",
             minHeight: colHeight + "px",
             resize: function(event, ui){
                 let el = ui.element;
-                
-                let gridVal = app.getClosestGridSnap(event.clientX);
-                console.log(gridVal, "new gridVal")
-                event.target.setAttribute("data-w", gridVal)
+     
+                let gridVal = app.getClosestGridSnap(event.target, event.clientX, "x");
+                event.target.setAttribute("data-w", gridVal);
+
+
+                let height = app.getClosestGridSnap(event.target, event.clientY, "y");
+                //event.target.setAttribute("data-h", height)
             }
 
         });
@@ -1422,13 +1419,51 @@ var app = {
 
        
     },
+    getPosition:function(el) {
+        var xPos = 0;
+        var yPos = 0;
+       
+        while (el) {
+          if (el.tagName == "BODY") {
+            // deal with browser quirks with body/window/document and page scroll
+            var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+            var yScroll = el.scrollTop || document.documentElement.scrollTop;
+       
+            xPos += (el.offsetLeft - xScroll + el.clientLeft);
+            yPos += (el.offsetTop - yScroll + el.clientTop);
+          } else {
+            // for all other non-BODY elements
+            xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+            yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+          }
+       
+          el = el.offsetParent;
+        }
+        return {
+          x: xPos,
+          y: yPos
+        };
+      },
     
-    getClosestGridSnap:function(val){
-        let wid = $(window).width();
-        let unit = wid/12;
-        let cal = val/unit;
-        let gridVal = Math.ceil(cal);
-        return gridVal;
+    getClosestGridSnap:function(node, val, axis){
+        let pos = app.getPosition(node);
+        
+        if(axis=="x"){
+            let wid = $(window).width();
+            let unit = wid/12;
+            let cal = val/unit;
+            let offset = pos.x;
+            let offsetGrid = Math.floor(offset/unit);
+            let gridVal = Math.ceil(cal);
+            let adjustedGridVal = gridVal - offsetGrid;
+            console.log("offset", offset, "grid", offsetGrid, "adjusted", adjustedGridVal )
+
+            
+            return adjustedGridVal;
+        } else {
+            let res = Math.ceil(val/200);
+            return res;
+        }
 
     },
     

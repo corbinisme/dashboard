@@ -52,6 +52,7 @@ var MakeUseOf = {
         $.ajax({
             url: this.url,
             success: function(res){
+                console.log("make use of ", res)
                 let $temp = $(document.createElement("div"));
                 $temp.html(res);
                 $temp.find(".w-content").find("article").each(function(){
@@ -64,6 +65,9 @@ var MakeUseOf = {
                     MakeUseOf.state.currentData.push(temp)
                 });
                 MakeUseOf.render();
+            },
+            error: function(e){
+                console.log(e)
             }
         });
             

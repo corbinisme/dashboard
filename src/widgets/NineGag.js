@@ -3,12 +3,16 @@ var NineGag = {
     meta: {
         column: "col-lg-4 col-md-4"
     },
+    template: "carousel",
     state: {
       size: 500,
       dom: null,
+      start: 1,
+      stop: 2,
+      max: 1,
       header: {
           items: [
-            {
+            /*{
                 type: "a",
                 text: "<i class='fa fa-chevron-left'></i>",
                 classNames: "rss_prev btn btn-default btn-sm btn-outline-secondary",
@@ -20,6 +24,7 @@ var NineGag = {
                classNames: "rss_next btn btn-default btn-outline-secondary btn-sm",
                link: "javascript:NineGag.slide('next')"
            },
+           */
 			
           ]
       },
@@ -64,14 +69,14 @@ var NineGag = {
                 
             $(xml).find("item").each(function(){
                 let temp = {
-                    title: $(this).find("title").text(),
-                    guid: $(this).find("guid").text(),
-                    description: $(this).find("description").html()
+                    title: app.removeCdata($(this).find("title").text()),
+                    guid: app.removeCdata($(this).find("guid").text()),
+                    description: app.removeCdata($(this).find("description").html())
                 }
                 NineGag.state.currentData.push(temp)
             })
             
-                NineGag.render();
+            NineGag.render();
 
             }
         })
@@ -86,17 +91,12 @@ var NineGag = {
     },
     render: function(){
         var $node = $(NineGag.state.dom);
-        let stringy = `
-            <div class="rowSlider" data-transform="0"><div class="slider">
-        `;
-        NineGag.state.currentData.forEach(function(item){
-            stringy+=`<div class="rowItem"><h4>${NineGag.removeCdata(item.title)}</h4>
-            
-            ${NineGag.removeCdata(item.description)}</div>`
-
-        });
-
-        stringy+=`</div></div>`;
+        
+        stringy = app.widgetLayouts.carouselVideo(NineGag.state.currentData, {
+            title: "NineGag",
+            show: 3, 
+            fields: ["title", "description", "link"]
+        })
         $node.html(stringy);
 
         let wid = $(NineGag.state.dom).closest(".card").width();
@@ -114,6 +114,8 @@ var NineGag = {
             $(this).height(hei);
             
         })
+
+
     }
 }
 

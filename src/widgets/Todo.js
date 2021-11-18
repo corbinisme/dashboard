@@ -264,7 +264,7 @@ var Todo = {
   render: function(){
     
     var htmlTemplate = `
-    <div class="card-body">
+    <div class="card-body-nopad">
     <a href="#" class="btn btn-primary random">RANDOM SITE</a><hr />
     `;
     var older = `

@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="dist/css/Dashboard.css?v=17" rel="stylesheet" />
-    <link href="asset/app.css?v=5" rel="stylesheet" />
+
     <link href="dist/css/styles.css" rel="stylesheet" />
     
     

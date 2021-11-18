@@ -89,6 +89,27 @@ body {
 .portlet.widget_BibleTrivia .actions svg {
   display: none; }
 
+.portlet.widget_NineGag .rss_video_wrap > * {
+  max-width: 100%;
+  margin: auto;
+  max-height: 100%; }
+
+.portlet.widget_Todo {
+  background-image: url("../img/table.jpg");
+  background-size: cover; }
+  .portlet.widget_Todo .card-header {
+    background: rgba(175, 119, 45, 0.8); }
+  .portlet.widget_Todo .card-body {
+    display: grid;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center; }
+    .portlet.widget_Todo .card-body .random {
+      display: inline-block;
+      font-size: 2em;
+      margin: auto;
+      padding: .375em .75em; }
+
 footer.mobile-footer {
   position: fixed;
   bottom: 0;
@@ -168,4 +189,14 @@ footer.mobile-footer {
       .dynamicWidgets.resizable .column[class*="col-"][data-w="12"] {
         width: 100%;
         flex: 1 100%;
-        max-width: 100%; } }
+        max-width: 100%; }
+      .dynamicWidgets.resizable .column[class*="col-"][data-h="1"] {
+        min-height: 100px; }
+      .dynamicWidgets.resizable .column[class*="col-"][data-h="2"] {
+        min-height: 200px; }
+      .dynamicWidgets.resizable .column[class*="col-"][data-h="3"] {
+        min-height: 300px; }
+      .dynamicWidgets.resizable .column[class*="col-"][data-h="4"] {
+        min-height: 400px; }
+      .dynamicWidgets.resizable .column[class*="col-"][data-h="5"] {
+        min-height: 500px; } }
