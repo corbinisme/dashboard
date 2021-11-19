@@ -94,6 +94,15 @@ body {
   margin: auto;
   max-height: 100%; }
 
+.portlet.widget_Madlib br {
+  display: none; }
+
+.portlet.widget_Madlib table {
+  background: transparent; }
+
+.portlet.widget_Madlib .card-body {
+  overflow: auto; }
+
 .portlet.widget_Todo {
   background-image: url("../img/table.jpg");
   background-size: cover; }

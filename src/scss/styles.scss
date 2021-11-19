@@ -163,6 +163,17 @@ body {
             }
         }
     }
+    &.widget_Madlib {
+        br {
+            display: none;;
+        }
+        table {
+          background: transparent;
+        }
+        .card-body {
+            overflow: auto;
+        }
+    }
     &.widget_Todo {
         background-image: url("../img/table.jpg");
         background-size: cover;
