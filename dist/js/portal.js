@@ -180,9 +180,9 @@ var helpers = {
 
 let layoutTemplates = [
     {name: "dashboard", page: "dashboard", desc: "Default widgets saving space", code:  ["Quote", "Good", "Happy", "Fun", "Dadjokes", "BibleVOD", "AM","Epic", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "PhotoNatgeo",   "PhotoNasa", "News", "Todo", "Instagram", "Facts", "DailyFacts", "GoodNewsHuff", "Buzzfeed", "HealthGazette","ExcellentTown", "BeautifulMess", "DailyGood", "Icr", "Lifehacker" ]},
-    {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD",  "PhotoNasa",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood" ]},
-    {name:"learn", page: "learn", desc: "", code: ["Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr", "HealthGazette", "ExcellentTown", "AM", "CSSTricks", "PhotoNatgeo", "Britannica" ]},
-    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "NineGag", "Todo|col-sm-4", "BoredPanda|col-sm-12", ,"Buzzfeed", "Epic", "GIFY|col-sm-4", "CorbinBlog|col-sm-4"  ]},
+    {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD",  "PhotoNasa",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood", "CorbinBlog|col-sm-12" ]},
+    {name:"learn", page: "learn", desc: "", code: ["Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr", "DevTo", "CSSTricks", "AM", "Britannica",  "HealthGazette", "ExcellentTown"]},
+    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "NineGag", "Todo|col-sm-4", "BoredPanda|col-sm-12", ,"Buzzfeed", "Epic", "GIFY|col-sm-4", "PhotoNatgeo",]},
 ];
 
 const allWidgets = ["Good", "Happy", "Instagram","BibleVOD", "AM","Epic","Todo", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "Sheets"];

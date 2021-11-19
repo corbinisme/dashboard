@@ -1,18 +1,18 @@
-const toggleSourceM = (val) => {
+const toggleSourceD = (val) => {
 
-    let $group = $(MakeUseOf.state.dom).closest(".portlet").find(".card-header").find(".btn-group");
+    let $group = $(DevTo.state.dom).closest(".portlet").find(".card-header").find(".btn-group");
     $group.find(".sourceBtn").removeClass("active");
     $group.find(".btn_" + val).addClass("active");
-    MakeUseOf.url = "https://www.MakeUseOf.com/feed/category/" + val + "/";
-    MakeUseOf.getData();
+    DevTo.url = "https://dev.to/" + val;
+    DevTo.getData();
 }
-var MakeUseOf = {
+var DevTo = {
     meta: {
-        column: "col-lg-8 col-md-8"
+        column: "col-lg-12 col-md-12"
     },
-    title: "MakeUseOf",
+    title: "DevTo",
     template: "carousel",
-    url: "https://www.makeuseof.com/",
+    url: "https://dev.to/",
    
     state: {
       size: 500,
@@ -40,31 +40,31 @@ var MakeUseOf = {
    
   
     init: function (node) {
-        MakeUseOf.state.dom = node;
+        DevTo.state.dom = node;
         DailyGood.renderHeader();
-        MakeUseOf.getData()
+        DevTo.getData()
     },
 
   
     getData: function () {
-        console.log(this.url, "load this")
-        MakeUseOf.state.currentData = [];
+        DevTo.state.currentData = [];
         $.ajax({
             url: this.url,
             success: function(res){
                 console.log("make use of ", res)
                 let $temp = $(document.createElement("div"));
                 $temp.html(res);
-                $temp.find(".w-content").find("article").each(function(){
+                $temp.find(".articles-list").find(".crayons-story").each(function(){
                     let temp = {
-                        title: $(this).find(".bc-title").text(),
-                        guid: "https://www.makeuseof.com" + $(this).find(".bc-title a").attr("href"),
-                        image: $(this).find("img").attr("src"),
-                        description: $(this).find(".bc-excerpt").text()
+                        title: $(this).find(".crayons-story__title a").text(),
+                        guid:  "https://dev.to/" + $(this).find(".crayons-story__title a").attr("href"),
+                        //image: $(this).find(".crayons-avatar img").attr("src"),
+                        image: "",
+                        description: ""
                     }
-                    MakeUseOf.state.currentData.push(temp)
+                    DevTo.state.currentData.push(temp)
                 });
-                MakeUseOf.render();
+                DevTo.render();
             },
             error: function(e){
                 console.log(e)
@@ -74,15 +74,16 @@ var MakeUseOf = {
     },
 
    render: function() {
-        var node = $(MakeUseOf.state.dom);
+        var node = $(DevTo.state.dom);
     
-        let stringy = app.widgetLayouts.carousel(MakeUseOf.state.currentData, {
-            title: "MakeUseOf",
+        let stringy = app.widgetLayouts.carousel(DevTo.state.currentData, {
+            title: "DevTo",
             show: 3, 
             fields: ["title", "description", "link"]
         })
 
         $(node).html(stringy);
+        app.getPreviews(DevTo.title)
         return stringy;
    }
 

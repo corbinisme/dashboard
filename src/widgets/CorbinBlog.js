@@ -10,8 +10,8 @@ var CorbinBlog = {
       size: 500,
       dom: null,
       start: 1,
-      stop: 3,
-      max: 2,
+      stop: 4,
+      max: 3,
       header: {
           items: [
              {
