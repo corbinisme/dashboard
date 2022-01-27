@@ -15,6 +15,7 @@ var Alerts = {
   state: {
       currentAlert: 1,
       totalAlerts: 4,
+      pro: "pretty",
       alerts: [
         {text: "Latest alerts - things for you to know", read: true},
         {text: "Due to COVID19, you must not breathe", read: false},
@@ -32,6 +33,7 @@ var Alerts = {
       
   },
   init: function (node) {
+    console.log("alerts weee");
       Alerts.state.dom = node;
       Alerts.bindings();
       Alerts.getData();
