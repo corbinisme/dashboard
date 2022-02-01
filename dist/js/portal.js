@@ -290,27 +290,48 @@ var app = {
     getPreviews: function(title){
 
         let node = document.querySelector(".widget_"+title);
+        let counter = 1;
         node.querySelectorAll(".item").forEach(function(item){
 
+            
             let a = item.querySelector(".rss_heading a");
             let href = a.getAttribute("href");
             let img = item.querySelector(".rss_image");
             let origSrc = img.getAttribute("src");
+            console.log(counter, origSrc)
             if(origSrc=="undefined" || origSrc == null || origSrc == ""){
-
+                
                // ajax a curl call of the link and find meta?
                $.ajax({
                 url: href,
                 success: function(html){
 
-                   
+                    counter++;
                     let meta = html.substring(html.indexOf('<meta property="og:image'), html.length);
                     meta = meta.substring(0, meta.indexOf("/>")+2);
 
                     let temp = document.createElement("div");
                     temp.innerHTML = meta;
-                    let src = temp.querySelector("meta").getAttribute("content");
-                    img.setAttribute("src", src);
+                    if(temp.querySelector("meta")!=null){
+                        let src = temp.querySelector("meta").getAttribute("content");
+                        img.setAttribute("src", src);
+                    } else {
+                        let imgNew = "https://picsum.photos/400/" + (300+counter);
+                        img.setAttribute("src", imgNew);
+                        let newurl = "https://us7.proxysite.com/includes/process.php?action=update";
+                        /*
+                        $.ajax({
+                            url: newurl,
+                            data: {d: href},
+                            type: "POST",
+                            success: function(res){
+                                console.log("try again", res)
+                            },
+                            error: function(e){}
+                        })
+                        console.log(href, html);
+                        */
+                    }
                 },
                 error: function(e){
                     console.log(e);

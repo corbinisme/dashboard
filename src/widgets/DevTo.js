@@ -12,7 +12,8 @@ var DevTo = {
     },
     title: "DevTo",
     template: "carousel",
-    url: "https://dev.to/",
+    //url: "https://dev.to/",
+    url: "http://feeds.feedburner.com/dev/WZhx",
    
     state: {
       size: 500,
@@ -48,10 +49,17 @@ var DevTo = {
   
     getData: function () {
         DevTo.state.currentData = [];
+        app.dataTemplates.rss({
+            url: this.url, 
+            fields: "all",
+            title: this.title
+          });
+        /*
         $.ajax({
             url: this.url,
             success: function(res){
-                console.log("make use of ", res)
+                console.log("devto ", res)
+              
                 let $temp = $(document.createElement("div"));
                 $temp.html(res);
                 $temp.find(".articles-list").find(".crayons-story").each(function(){
@@ -64,12 +72,25 @@ var DevTo = {
                     }
                     DevTo.state.currentData.push(temp)
                 });
+               
+               $(res).find("item").each(function(item){
+                let temp = {
+                    title: $(this).find("title").html(),
+                    guid:   $(this).find("guid").html(),
+                    //image: $(this).find(".crayons-avatar img").attr("src"),
+                    image: "",
+                    description: $(this).find("description").html(),
+                }
+                DevTo.state.currentData.push(temp)
+               })
+               
                 DevTo.render();
             },
             error: function(e){
                 console.log(e)
             }
         });
+        */
             
     },
 
@@ -83,7 +104,7 @@ var DevTo = {
         })
 
         $(node).html(stringy);
-        app.getPreviews(DevTo.title)
+        //app.getPreviews(DevTo.title)
         return stringy;
    }
 
