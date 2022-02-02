@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Corbin Rose Dashboard</title>
+
     <link rel="icon" type="image/x-icon" href="dist/img/goat2.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
@@ -22,7 +22,7 @@
     <link href="dist/css/styles.css" rel="stylesheet" />
     
     
-    <title>CorbinRose Dashboard</title>
+    <title>CorbinRose Dashboard of Happy</title>
   </head>
  
 		<div class="app">
