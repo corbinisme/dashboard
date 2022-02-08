@@ -61,6 +61,7 @@ var AutoEvolution = {
             fields: ["title", "description", "link"]
         })
 
+        console.log("auto evolution via feedburner");
         $(node).html(stringy);
         app.getPreviews("AutoEvolution")
         return stringy;
