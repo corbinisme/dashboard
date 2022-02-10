@@ -12,7 +12,7 @@ var MakeUseOf = {
     },
     title: "MakeUseOf",
     template: "carousel",
-    url: "https://www.makeuseof.com/",
+    url: "http://feeds.feedburner.com/makeuseof/pMkw",
    
     state: {
       size: 500,
@@ -49,6 +49,13 @@ var MakeUseOf = {
     getData: function () {
         console.log(this.url, "load this")
         MakeUseOf.state.currentData = [];
+
+        app.dataTemplates.rss({
+            url: MakeUseOf.url, 
+            fields: "all",
+            title: this.title
+        });
+        /*
         $.ajax({
             url: this.url,
             success: function(res){
@@ -70,6 +77,7 @@ var MakeUseOf = {
                 console.log(e)
             }
         });
+        */
             
     },
 
