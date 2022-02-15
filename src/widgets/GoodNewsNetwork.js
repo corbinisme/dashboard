@@ -7,7 +7,11 @@ var GoodNewsNetwork = {
       dom: null,
       header: {
           items: [
-           
+            {   type: "a",
+                 text: "<i class='fas fa-external-link-alt'></i>",
+                 classNames: "rss_prev btn btn-default btn-sm btn-outline-secondary",
+                 link: "javascript:window.open('https://www.instagram.com/goodnews_movement/')"
+            }
           ]
       },
       currentData: []
@@ -27,7 +31,7 @@ var GoodNewsNetwork = {
         var $target = $tarBody.closest(".card").find(".card-header");
         var title = "GoodNewsNetwork"; // localized
         var res = app.initHeaderItems(GoodNewsNetwork.state.header.items, title);
-        //$target.html(res);
+        $target.html(res);
     },
 
     getData: function () {

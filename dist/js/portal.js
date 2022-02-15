@@ -75,7 +75,7 @@ $.ajaxSetup({
 jQuery.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
 
-        if(options.url.indexOf("linkpreview")>-1){
+        if(options.url.indexOf("linkpreview")>-1|| options.url.indexOf("instagram")>-1){
             // leave it
         } else {
             //options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
