@@ -119,11 +119,19 @@ body {
 .portlet.widget_Madlib .card-body {
   overflow: auto;
 }
-.portlet.widget_GoodNewsNetwork .card-body {
+.portlet.widget_GoodNewsNetwork .card-body, .portlet.widget_BabyGoats .card-body, .portlet.widget_TinyHomes .card-body, .portlet.widget_TotesAcorbs .card-body {
   overflow: auto;
 }
-.portlet.widget_GoodNewsNetwork .card-body iframe {
+.portlet.widget_GoodNewsNetwork .card-body iframe, .portlet.widget_BabyGoats .card-body iframe, .portlet.widget_TinyHomes .card-body iframe, .portlet.widget_TotesAcorbs .card-body iframe {
   margin-top: -157px !important;
+}
+.portlet.widget_PinterestGreenscape .card-body > span {
+  width: 100% !important;
+  max-width: 999em;
+  height: 100%;
+}
+.portlet.widget_PinterestGreenscape .card-body > span > span[data-pin-href="https://www.pinterest.com"] {
+  height: 244px !important;
 }
 .portlet.widget_Todo {
   background-image: url("../img/table.jpg");

@@ -75,7 +75,10 @@ $.ajaxSetup({
 jQuery.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
 
-        if(options.url.indexOf("linkpreview")>-1|| options.url.indexOf("instagram")>-1){
+        if(
+            options.url.indexOf("linkpreview")>-1|| 
+            options.url.indexOf("instagram")>-1 || 
+            options.url.indexOf("assets.pinterest")>-1){
             // leave it
         } else {
             //options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
@@ -184,9 +187,9 @@ var helpers = {
 
 let layoutTemplates = [
     {name: "dashboard", page: "dashboard", desc: "Default widgets saving space", code:  ["Quote", "Good", "Happy", "Fun", "Dadjokes", "BibleVOD", "AM","Epic", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "PhotoNatgeo",   "PhotoNasa", "News", "Todo", "Instagram", "Facts", "DailyFacts", "GoodNewsHuff", "Buzzfeed", "HealthGazette","ExcellentTown", "BeautifulMess", "DailyGood", "Icr", "Lifehacker" ]},
-    {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD",  "PhotoNasa", "GoodNewsNetwork",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood", "CorbinBlog|col-sm-12" ]},
-    {name:"learn", page: "learn", desc: "", code: ["Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr", "DevTo", "CSSTricks", "AM", "Britannica", "MakeUseOf|col-sm-12", "HealthGazette", "ExcellentTown"]},
-    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "NineGag", "Todo|col-sm-4", "BoredPanda|col-sm-12", ,"Buzzfeed", "Epic", "Madlib|col-sm-4", "PhotoNatgeo", "AutoEvolution"]},
+    {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD",  "PhotoNasa", "GoodNewsNetwork",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood", "TotesAcorbs|col-sm-6","CorbinBlog|col-sm-6" ]},
+    {name:"learn", page: "learn", desc: "", code: ["Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr", "DevTo", "CSSTricks", "AM", "Britannica", "MakeUseOf|col-sm-12", "PinterestGreenscape", "HealthGazette", "ExcellentTown"]},
+    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "NineGag", "Todo|col-sm-4", "BoredPanda|col-sm-12", "BabyGoats|col-sm-6", "TinyHomes|col-sm-6", "Buzzfeed", "Epic", "Madlib|col-sm-4", "PhotoNatgeo", "AutoEvolution"]},
 ];
 
 const allWidgets = ["Good", "Happy", "Instagram","BibleVOD", "AM","Epic","Todo", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "Sheets"];

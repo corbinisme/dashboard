@@ -174,13 +174,29 @@ body {
             overflow: auto;
         }
     }
-    &.widget_GoodNewsNetwork {
+    &.widget_GoodNewsNetwork, &.widget_BabyGoats, &.widget_TinyHomes, &.widget_TotesAcorbs {
         .card-body {
             overflow: auto;
 
             iframe {
                 margin-top: -157px!important;
             }
+        }
+    }
+
+    &.widget_PinterestGreenscape {
+        .card-body {
+            >span {
+                width: 100%!important;
+                max-width: 999em;
+                height: 100%;
+                >span[data-pin-href="https://www.pinterest.com"] {
+                    height: 244px!important;
+                
+                }
+            }
+
+            
         }
     }
     &.widget_Todo {
