@@ -13,7 +13,7 @@ var DevTo = {
     title: "DevTo",
     template: "carousel",
     //url: "https://dev.to/",
-    url: "http://feeds.feedburner.com/dev/WZhx",
+    url: "/util/loadRSS.php?url=http://feeds.feedburner.com/dev/WZhx",
    
     state: {
       size: 500,
@@ -49,11 +49,27 @@ var DevTo = {
   
     getData: function () {
         DevTo.state.currentData = [];
+        /*
         app.dataTemplates.rss({
             url: this.url, 
             fields: "all",
             title: this.title
           });
+          */
+
+
+          $.ajax({
+            url: this.url,
+            dataType: "json",
+            success: function(res){
+ 
+                DevTo.state.currentData = res;
+                DevTo.render();
+            },
+            error: function(e){
+                console.log(e);
+            }
+        });
         /*
         $.ajax({
             url: this.url,

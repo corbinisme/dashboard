@@ -12,7 +12,7 @@ var MakeUseOf = {
     },
     title: "MakeUseOf",
     template: "carousel",
-    url: "http://feeds.feedburner.com/makeuseof/pMkw",
+    url: "/util/loadRSS.php?url=http://feeds.feedburner.com/makeuseof/pMkw",
    
     state: {
       size: 500,
@@ -47,37 +47,51 @@ var MakeUseOf = {
 
   
     getData: function () {
-        console.log(this.url, "load this")
+
         MakeUseOf.state.currentData = [];
 
+        /*
         app.dataTemplates.rss({
             url: MakeUseOf.url, 
             fields: "all",
             title: this.title
         });
-        /*
+        */
+        
         $.ajax({
             url: this.url,
+            dataType: "json",
             success: function(res){
-                console.log("make use of ", res)
-                let $temp = $(document.createElement("div"));
-                $temp.html(res);
-                $temp.find(".w-content").find("article").each(function(){
+
+                MakeUseOf.state.currentData = res;
+                /*
+                $(res).find("item").each(function(){
                     let temp = {
-                        title: $(this).find(".bc-title").text(),
-                        guid: "https://www.makeuseof.com" + $(this).find(".bc-title a").attr("href"),
-                        image: $(this).find("img").attr("src"),
-                        description: $(this).find(".bc-excerpt").text()
+                        title: $(this).find("title").text(),
+                        guid: $(this).find("link").text(),
+                        image: $(this).find("enclosure").attr("url"),
+                        description: $(this).find("dsceiption").html()
+                    }
+                    if(temp.guid==null || temp.guid==""){
+                        $(this).children().each(function(ch){
+
+                            if($(this)[0].nodeName.toLowerCase()=="link"){
+                                console.log($(this)[0], $(this)[0].innerHTML);
+                            };
+                        })
                     }
                     MakeUseOf.state.currentData.push(temp)
                 });
+                */
                 MakeUseOf.render();
             },
             error: function(e){
-                console.log(e)
+                
+            
+               
             }
         });
-        */
+        
             
     },
 
