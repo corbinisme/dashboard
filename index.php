@@ -14,7 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+        />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="dist/css/Dashboard.css?v=17" rel="stylesheet" />
@@ -144,6 +147,7 @@
 
 
   <!-- Bootstrap core JS-->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="dist/js/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
@@ -151,7 +155,9 @@
 
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
         <!-- Core theme JS-->
+       
     <script>
+        
 
 var site = {
     bakeCookie: function(n, t) {
@@ -181,8 +187,8 @@ var layout = [
         var bootstrapVersion = "3";
         let animateNumbersBool = true;
         let animateWidgets = true;
-        let dragging = true;
-        let resizing = true;
+        let dragging = false;
+        let resizing = false;
         const appNames = {
             corbin: "Corbin's Dashboard",
             

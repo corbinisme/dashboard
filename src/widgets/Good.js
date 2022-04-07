@@ -99,8 +99,10 @@ var Good = {
             show: 3, 
             fields: ["title", "description", "link"]
         })
+        
 
         $(node).html(stringy);
+
         return stringy;
    }
 

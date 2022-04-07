@@ -28,6 +28,48 @@ body {
 
 }
 
+.swiper {
+    height:100%;
+
+    .swiper-wrapper {
+        height: calc(100% - 30px);
+
+        .swiper-slide {
+
+            .swiper-content {
+                height: 100%;
+                overflow: auto;
+
+                
+
+                span {
+                    display: block;
+                    &.rss_image_wrap {
+                        flex: 1 100%;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+                    &.rss_heading {
+                        padding: 1em 2em;
+                        
+                        a {
+                            font-weight: bold;
+                        }
+                    }
+                    &.rss_content{
+                        padding: 0 2em;
+                    }
+                }
+                
+            }
+        }
+
+    }
+}
+
 .portlet {
     &:not(.widget_Quote) {
         height: $portletHeight!important;
@@ -55,6 +97,9 @@ body {
         }
     }
     &[data-template='carousel']{
+        .rss_btn {
+            display: none;
+        }
 
         .card-body {
             overflow: auto;
@@ -100,7 +145,7 @@ body {
             }
             
             .rss_image_wrap {
-                height: 200px;
+                height: 230px;
                 overflow: hidden;
                 display: block;
                 background: #333
@@ -179,7 +224,7 @@ body {
             overflow: auto;
 
             iframe {
-                margin-top: -157px!important;
+                margin-top: -71px!important;
             }
         }
     }
@@ -245,7 +290,7 @@ footer {
                 min-width: 50%;
             }
             .rss_image_wrap {
-                height: 160px;
+                height: 200px;
             }
         }
     }

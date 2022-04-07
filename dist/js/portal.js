@@ -294,6 +294,7 @@ var app = {
     currentPage: "good",
     currentShown: "",
     ajaxRequests: [],
+    swipers:[],
     screenShotKey: "491f04b63a7131800c7348e200661898",
     getPreviews: function(title){
 
@@ -348,6 +349,66 @@ var app = {
             } else {
                 //all good
             }
+        })
+    },
+    initSwipers: function(){
+        document.querySelectorAll(".swiper:not(.loaded)").forEach(function(el){
+            let slidesper = el.getAttribute("data-slidesper");
+            let slidesPerMD = slidesper-1;
+            if(slidesPerMD<1){
+                slidesPerMD = 1;
+            }
+            let slidesPerSM = slidesPerMD-1;
+            if(slidesPerSM<1){
+                slidesPerSM = 1;
+            }
+            let jstitle = el.getAttribute("data-title");
+            let swiper = new Swiper(el, {
+                // Optional parameters
+                direction: 'horizontal',
+                loop: false,
+              
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination.' + jstitle,
+                    clickable: true,
+                    dynamicBullets: true,
+                  },
+
+                
+                slidesPerView: 1,
+                spaceBetween: 0,
+               
+                breakpoints: {  
+                    400: {
+                    slidesPerView: slidesPerSM,
+                    spaceBetween: 0
+                    },
+                    // when window width is >= 480px
+                    600: {
+                    slidesPerView: slidesPerMD,
+                    spaceBetween: 0
+                    },
+                    // when window width is >= 640px
+                    800: {
+                    slidesPerView: slidesper,
+                    spaceBetween: 0
+                    }
+                },
+                scrollbar: {
+                    el: ".swiper-scrollbar." + jstitle,
+                },
+              
+                // Navigation arrows
+                navigation: {
+                  nextEl: '.swiper-button-next.' + jstitle,
+                  prevEl: '.swiper-button-prev.' + jstitle,
+                },
+              
+                
+              });
+
+              el.classList.add("loaded")
         })
     },
     dataTemplates: {
@@ -436,6 +497,7 @@ var app = {
                    
                     window[options.title].state.currentData = ret;
                     window[options.title].render();
+                    app.initSwipers();
                     let $widget = $(".widget_" + options.title)
                     app.toggleWidgetLoading($widget.find(".card-body"), "hide")
                     
@@ -465,19 +527,30 @@ var app = {
     widgetLayouts: {
         carousel: function(data, options){
             let title = options.title;
+            let jstitle = title.toLowerCase();
             let widgetObj = window[title];
 
             let start = widgetObj.state.start;
             let stop = widgetObj.state.stop;
-            var $rss = $(document.createElement("div"));
-            var $ul = $(document.createElement("div"));
+            // get slides per view
+            let slidesper = stop-start;
+            let $wrapper = $(document.createElement("div"));
+            let $swiper = $(document.createElement("div"));
+            $swiper.addClass("swiper").addClass(jstitle);
+            $swiper.attr("data-slidesper", slidesper);
+            $swiper.attr("data-title", jstitle)
 
-            $ul.addClass("rss_list row");
+            let $swiperWapper = $(document.createElement("div"));
+            $swiperWapper.addClass("swiper-wrapper")
+            
             window[title].state.currentData.forEach(function (el, idx) {
+                let $swiperSlide = $(document.createElement("div"));
+
+                $swiperSlide.addClass("swiper-slide");
                 let img = "";
 
                 var zeroIndex = idx+1;
-                if (zeroIndex >= start && zeroIndex < stop) {
+                //if (zeroIndex >= start && zeroIndex < stop) {
                    var $item = $(document.createElement("div"));
 
                    let image = "";
@@ -501,7 +574,7 @@ var app = {
                        }
                    }
 
-                   $item.addClass("col item");
+                   $item.addClass("swiper-content");
                    var temp = `<span class='rss_image_wrap'>
                         <img class='rss_image' src='${image}' alt='rss item featured' />
                     </span>
@@ -509,13 +582,21 @@ var app = {
                         <a href='${el.guid}' target='_blank'>${el.title}</a></span>
                     <span class='rss_content'>${el.description}</span>`;
                    $item.html(temp);
-                   $ul.append($item);
-                }
+                   $swiperSlide.append($item);
+                   $swiperWapper.append($swiperSlide);
+                //}
                
            });
-           $rss.append($ul);
+           
+           $swiper.append($swiperWapper);
+           $wrapper.append($swiper);
 
-           return $rss.html();
+           $wrapper.append(`<div class="swiper-pagination ${jstitle}"></div>
+           <div class="swiper-button-prev ${jstitle}"></div>
+           <div class="swiper-button-next ${jstitle}"></div>
+           <div class="swiper-scrollbar ${jstitle}"></div>`);
+
+           return $wrapper.html();
 
         },
         carouselVideo: function(data, options){

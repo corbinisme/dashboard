@@ -265,7 +265,9 @@ body {
 .portlet[data-template='carousel'] .card-body .col {
     border-right: 1px solid var(--color-content-border);
 }
-
+.portlet[data-template='carousel'] .card-body .swiper-slide {
+    border-right: 1px solid var(--color-content-border);
+}
 
 @keyframes colorchange {
   0%   { transform: scale(1.0) rotate(0deg); }
