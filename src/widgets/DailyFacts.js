@@ -4,7 +4,7 @@ var DailyFacts = {
         column: "col-lg-4 col-md-4"
     },
     title: "DailyFacts",
-    template: "carousel",
+    template: "photocarousel",
     url: API_DailyFacts,
     state: {
       size: 500,

@@ -3,7 +3,7 @@ var NineGag = {
     meta: {
         column: "col-lg-4 col-md-4"
     },
-    template: "carousel",
+    template: "photocarousel",
     state: {
       size: 500,
       dom: null,
