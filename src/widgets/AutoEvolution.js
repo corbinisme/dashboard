@@ -43,25 +43,54 @@ var AutoEvolution = {
     },
     
     getData: function () {
+        let ret = [];
+        $.ajax({
+            url: this.url,
+            success: function(xml){
 
-        app.dataTemplates.rss({
+                $(xml).find("item").each(function (idx, el) {
+                    let temp = {};
+                    temp.title = $(this).find("title").text();
+                    temp.guid = $(this).find("link").text();
+                    temp.description = "Wee";
+                    $(this).children().each(function(){
+                        if(this.localName.toLowerCase().indexOf("media:")>-1 || this.localName=="enclosure"){
+                            if(this.getAttribute("url")){
+                                image=this.getAttribute("url");
+                                temp["image"] = image;
+                            }
+                        }
+                    });
+                    ret.push(temp);
+                });
+
+                AutoEvolution.state.currentData = ret;
+                AutoEvolution.render()
+                app.initSwipers();
+                let $widget = $(".widget_" + AutoEvolution.title)
+                app.toggleWidgetLoading($widget.find(".card-body"), "hide")
+            }
+        });
+
+        /*app.dataTemplates.rss({
             url: this.url, 
             fields: "all",
             title: this.title
-        });   
+        });
+        */   
     },
    
    render: function() {
 
         var node = $(AutoEvolution.state.dom);
-        
+
         let stringy = app.widgetLayouts.carousel(AutoEvolution.state.currentData, {
             title: this.title,
             show: 3, 
             fields: ["title", "description", "link"]
         })
 
-        console.log("auto evolution via feedburner");
+        
         $(node).html(stringy);
         app.getPreviews("AutoEvolution")
         return stringy;

@@ -436,14 +436,15 @@ var app = {
                                     }
                                 } else {
 
-                                    if(options.fields == "all"){
-                                       
-                                        temp[this.localName] = app.removeCdata(app.htmlDecode($(this).html()));
+                                    
+                                }
+                                if(options.fields == "all"){
                                         
-                                    }
+                                    temp[this.localName] = app.removeCdata(app.htmlDecode($(this).html()));
+                                    
                                 }
                                 
-                            });
+                        });
 
                         
                             el.childNodes.forEach(function (ele, indx) {

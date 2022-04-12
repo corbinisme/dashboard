@@ -43,6 +43,10 @@ body {
 .swiper .swiper-wrapper .swiper-slide .swiper-content span.rss_content {
   padding: 0 2em;
 }
+.swiper .swiper-wrapper .swiper-slide .swiper-content span.rss_content img {
+  max-width: 100%;
+  height: auto;
+}
 
 .portlet:not(.widget_Quote) {
   height: 400px !important;
