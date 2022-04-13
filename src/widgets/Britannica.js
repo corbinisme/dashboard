@@ -105,7 +105,7 @@ var Britannica = {
         $node.find("a").each(function(){
             $(this).attr("target", "_blank");
         })
-
+        app.initSwipers();
         return newstringy;
        
     }

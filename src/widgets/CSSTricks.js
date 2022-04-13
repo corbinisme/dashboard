@@ -81,11 +81,13 @@ var CSSTricks = {
       })
 
       $(node).html(stringy);
+      app.getPreviews(CSSTricks.title);
+      /*
       var t = window.setInterval(function(){
         
           if($(CSSTricks.state.dom).find(".item").length){
             clearInterval(t);
-            app.getPreviews(CSSTricks.title);
+            
             
             $(CSSTricks.state.dom).find(".item").each(function(idx,item){
               
@@ -119,7 +121,7 @@ var CSSTricks = {
             ///
           }
       },200)
-      
+      */
       return stringy;
 
     }

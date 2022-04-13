@@ -89,6 +89,7 @@ var DailyGood = {
                 }
             });
             DailyGood.render();
+            app.initSwipers();
           },
           error: function(e){}
       })

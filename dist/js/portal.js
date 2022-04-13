@@ -188,8 +188,8 @@ var helpers = {
 
 let layoutTemplates = [
     {name: "dashboard", page: "dashboard", desc: "Default widgets saving space", code:  ["Quote", "Good", "Happy", "Fun", "Dadjokes", "BibleVOD", "AM","Epic", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "PhotoNatgeo",   "PhotoNasa", "News", "Todo", "Instagram", "Facts", "DailyFacts", "GoodNewsHuff", "Buzzfeed", "HealthGazette","ExcellentTown", "BeautifulMess", "DailyGood", "Icr", "Lifehacker" ]},
-    {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD",  "PhotoNasa", "GoodNewsNetwork",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood", "TotesAcorbs|col-sm-6","CorbinBlog|col-sm-6" ]},
-    {name:"learn", page: "learn", desc: "", code: ["MakeUseOf|col-sm-12","Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr",   "DevTo", "CSSTricks", "AM", "Britannica", "PinterestGreenscape", "HealthGazette", "ExcellentTown"]},
+    {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD", "CleanMemes", "GoodNewsNetwork",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood",  "TotesAcorbs|col-sm-6","CorbinBlog|col-sm-6", "ChristianHeadlines" ]},
+    {name:"learn", page: "learn", desc: "", code: ["MakeUseOf|col-sm-12","Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr",    "DevTo", "PhotoNasa",  "HealthGazette|col-sm-4", "ExcellentTown|col-sm-4", "CSSTricks", "AM", "Britannica", "PinterestGreenscape"]},
     {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "NineGag", "Todo|col-sm-4", "BoredPanda|col-sm-12", "BabyGoats|col-sm-6", "TinyHomes|col-sm-6", "Buzzfeed", "Epic", "Madlib|col-sm-4", "PhotoNatgeo", "AutoEvolution"]},
 ];
 
@@ -297,24 +297,25 @@ var app = {
     swipers:[],
     screenShotKey: "491f04b63a7131800c7348e200661898",
     getPreviews: function(title){
-
+        
         let node = document.querySelector(".widget_"+title);
         let counter = 1;
-        node.querySelectorAll(".item").forEach(function(item){
+        node.querySelectorAll(".swiper-slide").forEach(function(item){
 
             
             let a = item.querySelector(".rss_heading a");
             let href = a.getAttribute("href");
             let img = item.querySelector(".rss_image");
             let origSrc = img.getAttribute("src");
-            console.log(counter, origSrc)
+            
             if(origSrc=="undefined" || origSrc == null || origSrc == ""){
-                
+                console.log("get previews", title)
                // ajax a curl call of the link and find meta?
                $.ajax({
                 url: href,
                 success: function(html){
 
+                    console.log("getting image for", title, html);
                     counter++;
                     let meta = html.substring(html.indexOf('<meta property="og:image'), html.length);
                     meta = meta.substring(0, meta.indexOf("/>")+2);
@@ -328,18 +329,22 @@ var app = {
                         let imgNew = "https://picsum.photos/400/" + (300+counter);
                         img.setAttribute("src", imgNew);
                         let newurl = "https://us7.proxysite.com/includes/process.php?action=update";
-                        /*
+                        
                         $.ajax({
                             url: newurl,
                             data: {d: href},
                             type: "POST",
                             success: function(res){
-                                console.log("try again", res)
+                                
+                                let meta = res.substring(res.indexOf('<meta property="og:image'), res.length);
+                                meta = meta.substring(0, meta.indexOf("/>")+2);
+                                console.log("try again", meta);
+
                             },
                             error: function(e){}
                         })
                         console.log(href, html);
-                        */
+                        
                     }
                 },
                 error: function(e){
@@ -408,8 +413,10 @@ var app = {
                 
               });
 
-              el.classList.add("loaded")
-        })
+              el.classList.add("loaded");
+              app.getPreviews(el.closest(".portlet").getAttribute("data-title"));
+        });
+        
     },
     dataTemplates: {
         rss: function(options){
@@ -489,7 +496,9 @@ var app = {
                                 
                             });
                         
-                           
+                           if(typeof temp["image"] == "undefined"){
+                               temp["image"] = "";
+                           }
                         
                             ret.push(temp);
                         }

@@ -12,8 +12,8 @@ var HealthGazette = {
       mbx: null,
       hits: null,
       start: 1,
-      stop: 4,
-      max: 3,
+      stop: 2,
+      max: 1,
       total: 50,
       dom: null,
       header: {

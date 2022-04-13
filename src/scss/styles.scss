@@ -203,6 +203,9 @@ body {
             }
         }
     }
+    &.widget_CleanMemes {
+
+    }
     &.widget_NineGag {
         .rss_video_wrap {
             >* {
@@ -295,7 +298,7 @@ footer {
                 min-width: 50%;
             }
             .rss_image_wrap {
-                height: 200px;
+                height: 230px;
             }
         }
     }

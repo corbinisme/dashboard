@@ -206,7 +206,7 @@ footer.mobile-footer {
     min-width: 50%;
   }
   .portlet[data-template=carousel] .rss_image_wrap {
-    height: 200px;
+    height: 230px;
   }
 }
 @media all and (min-width: 800px) {

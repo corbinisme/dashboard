@@ -10,8 +10,8 @@ var Godtube = {
       size: 500,
       dom: null,
       start: 1,
-      stop: 4,
-      max: 3,
+      stop: 5,
+      max: 4,
       header: {
           items: [
             

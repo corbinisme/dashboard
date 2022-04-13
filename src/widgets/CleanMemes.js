@@ -1,12 +1,10 @@
-
-
-var ExcellentTown = {
+var CleanMemes = {
     meta: {
-        column: "col-lg-12 col-md-12"
+        column: "col-lg-4 col-md-4"
     },
-    title: "ExcellentTown",
-    template: "carousel",
-    url: 'https://excellenttown.com/feed/',
+    title: "CleanMemes",
+    template: "photocarousel",
+    url: 'https://cleanmemes.com/feed/',
     state: {
       size: 500,
       mbx: null,
@@ -32,22 +30,19 @@ var ExcellentTown = {
    
   
     init: function (node) {
-        ExcellentTown.state.dom = node;
-        ExcellentTown.renderHeader();
-        ExcellentTown.getData()
+        CleanMemes.state.dom = node;
+        CleanMemes.renderHeader();
+        CleanMemes.getData()
     },
 
-    RSShandleClick: function(value) {
-        window.open(value, "ExcellentTown");
-    },
-
+   
     renderHeader: function () {
         // get parent based on body node and render this once
         // so it doesn't need to re-render every time the body does
-        var $tarBody = $(ExcellentTown.state.dom);
+        var $tarBody = $(CleanMemes.state.dom);
         var $target = $tarBody.closest(".card").find(".card-header");
-        var title = "ExcellentTown"; // localized
-        var res = app.initHeaderItems(ExcellentTown.state.header.items, title);
+        var title = "CleanMemes"; // localized
+        var res = app.initHeaderItems(CleanMemes.state.header.items, title);
         //$target.html(res);
     },
 
@@ -62,15 +57,17 @@ var ExcellentTown = {
     },
 
    render: function() {
-        var node = $(ExcellentTown.state.dom);
+        var node = $(CleanMemes.state.dom);
     
-        let stringy = app.widgetLayouts.carousel(ExcellentTown.state.currentData, {
-            title: "ExcellentTown",
+        let stringy = app.widgetLayouts.carousel(CleanMemes.state.currentData, {
+            title: "CleanMemes",
             show: 3, 
             fields: ["title", "description", "link"]
         })
+        
 
         $(node).html(stringy);
+
         return stringy;
    }
 
