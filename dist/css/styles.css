@@ -196,6 +196,10 @@ footer.mobile-footer {
   height: 45px;
 }
 
+.swiper-pagination {
+  display: none;
+}
+
 @media all and (min-width: 525px) {
   .portlet[data-template=carousel] .card-body .col {
     width: 50%;
@@ -207,6 +211,10 @@ footer.mobile-footer {
   }
 }
 @media all and (min-width: 800px) {
+  .swiper-pagination {
+    display: block;
+  }
+
   .dynamicWidgets {
     padding: 1em 0;
   }

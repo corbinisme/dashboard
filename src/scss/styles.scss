@@ -288,6 +288,9 @@ footer {
     }
 }
 
+.swiper-pagination  {
+    display: none;
+}
 
 @media all and (min-width: 525px){ 
     .portlet {
@@ -302,10 +305,14 @@ footer {
             }
         }
     }
+    
    
 }
 
 @media all and (min-width: 800px){
+    .swiper-pagination  {
+        display: block;
+    }
     .dynamicWidgets {
         padding: 1em 0;
     }
