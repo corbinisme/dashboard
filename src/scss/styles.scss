@@ -6,7 +6,7 @@ body {
     display: block;
 }
 .dynamicWidgets {
-    padding: 1em 0;
+
     &.resizable {
         .column[class*="col-"] {
             flex: 1 auto;
@@ -306,6 +306,9 @@ footer {
 }
 
 @media all and (min-width: 800px){
+    .dynamicWidgets {
+        padding: 1em 0;
+    }
     .portlet {
         &[data-template='carousel']{
             .card-body .col {
@@ -332,7 +335,10 @@ footer {
         }
     }
     .dynamicWidgets {
-        padding: 1em 0;
+
+        padding: 0;
+        
+        
         &.resizable {
             .column[class*="col-"] {
                 flex: 1 auto;

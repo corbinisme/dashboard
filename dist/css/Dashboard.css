@@ -1059,11 +1059,11 @@ main {
 
 @media all and (max-width: 800px){
     body .portlet:not(.widget_Quote) {
-        height: calc(100vh - 140px)!important;
+        height: calc(100vh - 150px)!important;
 
     }
     body .portlet.widget_Quote {
-        height: calc(100vh - 140px)!important;
+        height: calc(100vh - 150px)!important;
     }
     .column {
         position: relative;
