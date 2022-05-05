@@ -100,6 +100,7 @@ var SunnySkies = {
 
                 
                 SunnySkies.render();
+                app.initSwipers();
             }
         })
         

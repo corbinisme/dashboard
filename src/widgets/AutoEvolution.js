@@ -50,8 +50,9 @@ var AutoEvolution = {
 
                 $(xml).find("item").each(function (idx, el) {
                     let temp = {};
+                    console.log($(this).children())
                     temp.title = $(this).find("title").text();
-                    temp.guid = $(this).find("link").text();
+                    temp.guid = $(this).find("guid").text();
                     temp.description = "Wee";
                     $(this).children().each(function(){
                         if(this.localName.toLowerCase().indexOf("media:")>-1 || this.localName=="enclosure"){

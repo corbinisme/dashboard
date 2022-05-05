@@ -77,7 +77,7 @@ body {
 
 .portlet {
     &:not(.widget_Quote) {
-        height: $portletHeight!important;
+        height: $portletHeight;
     }
 
     .headerItems {

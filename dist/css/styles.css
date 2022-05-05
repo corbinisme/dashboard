@@ -46,7 +46,7 @@ body {
 }
 
 .portlet:not(.widget_Quote) {
-  height: 400px !important;
+  height: 400px;
 }
 .portlet .headerItems .sourceBtn {
   display: none;

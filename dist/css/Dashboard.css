@@ -4,6 +4,7 @@
     --color-default: #000;
     --color-widget-border: rgba(0, 0, 0, 0.125);
     --color-content-border: #ccc;
+    --doc-height: 100%;
 }
 
 body {
@@ -1058,13 +1059,11 @@ main {
 }
 
 @media all and (max-width: 800px){
-    body .portlet:not(.widget_Quote) {
-        height: calc(100vh - 150px)!important;
-
+    body .portlet {
+        /*height: calc(100vh - 150px)!important;*/
+        height: calc(var(--doc-height) - 150px)!important;
     }
-    body .portlet.widget_Quote {
-        height: calc(100vh - 150px)!important;
-    }
+    
     .column {
         position: relative;
     }
@@ -1076,8 +1075,8 @@ main {
         margin-bottom: 0;
         position: static;
     }
-    .portlet.card .card-body {
-        height: calc(100vh - 176px)!important;
+    .portlet.card .card-body, .portlet.card .card-body:not(.widget_Quote) {
+        height: calc(var(--doc-height) - 176px)!important;
         
     }
     .portlet.card .card-body .card-body {
@@ -1104,7 +1103,7 @@ main {
     }
     .dynamicWidgets .column {
         height: 100vh;
-        height: calc(var(--vh, 1vh) * 100);
+        height: var(--doc-height);
     }
     .ui-resizable-se {
         display: none!important;

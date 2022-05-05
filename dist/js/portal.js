@@ -88,6 +88,12 @@ jQuery.ajaxPrefilter(function(options) {
     }
 });
 
+const documentHeight = () => {
+    const doc = document.documentElement
+    doc.style.setProperty('--doc-height', `${window.innerHeight}px`)
+}
+window.addEventListener('resize', documentHeight)
+
 
 let currentTheme = "light-mode";
 const html = document.getElementsByTagName('html')[0];
@@ -972,6 +978,8 @@ var app = {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         });
+
+        documentHeight();
         if(typeof bootstrapVersion!='undefined'){
             app.bootstrapVersion = bootstrapVersion;
         } else {
