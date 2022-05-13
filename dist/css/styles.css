@@ -139,6 +139,13 @@ body {
 .portlet.widget_BibleTrivia .actions svg {
   display: none;
 }
+.portlet.widget_Advice .card-body {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  padding: 1em;
+}
 .portlet.widget_NineGag .rss_video_wrap > * {
   max-width: 100%;
   margin: auto;

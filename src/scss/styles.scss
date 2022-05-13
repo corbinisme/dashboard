@@ -206,6 +206,15 @@ body {
     &.widget_CleanMemes {
 
     }
+    &.widget_Advice {
+        .card-body {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            text-align: center;
+            padding: 1em;
+        }
+    }
     &.widget_NineGag {
         .rss_video_wrap {
             >* {
