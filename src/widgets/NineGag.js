@@ -1,3 +1,12 @@
+const toggleSourceNineGag = (val) => {
+    console.log(val);
+    let $group = $(NineGag.state.dom).closest(".portlet").find(".card-header").find(".btn-group");
+    $group.find(".sourceBtn").removeClass("active");
+    $group.find(".btn_" + val).addClass("active");
+    NineGag.url = "https://9gag.com/tag/" + val;
+    NineGag.getData();
+}
+
 let API_NineGag = "https://9gagrss.com/feed/";
 var NineGag = {
     meta: {
@@ -12,19 +21,21 @@ var NineGag = {
       max: 1,
       header: {
           items: [
-            /*{
+            /*
+            {
                 type: "a",
-                text: "<i class='fa fa-chevron-left'></i>",
+                text: "Tippy Taps",
                 classNames: "rss_prev btn btn-default btn-sm btn-outline-secondary",
                 link: "javascript:NineGag.slide('prev')"
             },
            {
                type: "a",
-               text: "<i class='fa fa-chevron-right'></i>",
+               text: "Wholesome",
                classNames: "rss_next btn btn-default btn-outline-secondary btn-sm",
                link: "javascript:NineGag.slide('next')"
            },
            */
+           
 			
           ]
       },
