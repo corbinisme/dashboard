@@ -8,6 +8,9 @@ if(isset($_REQUEST['url'])) {
 	$url = "https://corbinrose.com/errorpage.php";
 }
 
+
 $out = file_get_contents($url);
+
+
 echo "<textarea>"  . $out . "</textarea>";
 ?>
