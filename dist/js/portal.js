@@ -193,13 +193,13 @@ var helpers = {
 }
 
 let layoutTemplates = [
-    {name: "dashboard", page: "dashboard", desc: "Default widgets saving space", code:  ["Quote", "Good", "Happy", "Fun", "Dadjokes", "BibleVOD", "AM","Epic", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "PhotoNatgeo",   "PhotoNasa", "News", "Todo", "Instagram", "Facts", "DailyFacts", "GoodNewsHuff", "Buzzfeed", "HealthGazette","ExcellentTown", "BeautifulMess", "DailyGood", "Icr", "Lifehacker" ]},
-    {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD", "CleanMemes", "GoodNewsNetwork",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood",  "TotesAcorbs|col-sm-6","CorbinBlog|col-sm-6", "ChristianHeadlines", "Advice" ]},
+    {name: "dashboard", page: "dashboard", desc: "Default widgets saving space", code:  ["Quote", "Good", "Happy", "Fun", "Dadjokes", "BibleVOD", "AM","Epic", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "Cheezeburger",  "CSSTricks", "Photo", "PhotoNatgeo",   "PhotoNasa", "News", "Todo", "Instagram", "Facts", "DailyFacts", "GoodNewsHuff", "Buzzfeed", "HealthGazette","ExcellentTown", "BeautifulMess", "DailyGood", "Icr", "Lifehacker" ]},
+    {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD", "CleanMemes", "GoodNewsNetwork",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood",  "TotesAcorbs|col-sm-6","CorbinBlog|col-sm-6", "ChristianHeadlines", "Advice", "FoxGood" ]},
     {name:"learn", page: "learn", desc: "", code: ["MakeUseOf|col-sm-12","Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr",    "DevTo", "PhotoNasa",  "HealthGazette|col-sm-4", "ExcellentTown|col-sm-4", "CSSTricks", "AM", "Britannica", "PinterestGreenscape"]},
-    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "NineGag", "Todo|col-sm-4", "BoredPanda|col-sm-12", "BabyGoats|col-sm-6", "TinyHomes|col-sm-6", "Buzzfeed", "Epic", "Madlib|col-sm-4", "PhotoNatgeo", "AutoEvolution"]},
+    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "Cheezeburger", "Todo|col-sm-4", "BoredPanda|col-sm-12", "BabyGoats|col-sm-6", "TinyHomes|col-sm-6", "Buzzfeed", "Epic", "Madlib|col-sm-4", "PhotoNatgeo", "AutoEvolution"]},
 ];
 
-const allWidgets = ["Good", "Happy", "Instagram","BibleVOD", "AM","Epic","Todo", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "Sheets"];
+const allWidgets = ["Good", "Happy", "Instagram","BibleVOD", "AM","Epic","Todo", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "Cheezeburger",  "CSSTricks", "Photo", "Sheets"];
 
 let layoutHtml = `
     <div class="row">
@@ -431,8 +431,11 @@ var app = {
                 url: options.url,
                 success: function (xml) {
 
+                    
                     let ret = [];
                     $(xml).find("item").each(function (idx, el) {
+
+                    
                         let temp = {};
 
                         if($(this).find("title").text().indexOf("Astrology")>-1){
@@ -447,9 +450,26 @@ var app = {
                                         image=this.getAttribute("url");
                                         temp["image"] = image;
                                     }
-                                } else {
 
                                     
+                                } else {
+
+                                    if(this.localName.toLowerCase().indexOf("a10")>-1){
+                                        
+                                        $(this).children().each(function(){
+
+                                            
+                                            let name = this.localName.toLowerCase();
+                                           
+                                            if(name.indexOf("media:")>-1){
+                                                if(this.getAttribute("url")){
+                                                    image=this.getAttribute("url");
+                                                    temp["image"] = image;
+                                                }
+                                            }
+                                        });
+                                        
+                                    }
                                 }
                                 if(options.fields == "all"){
                                         
@@ -1002,7 +1022,7 @@ var app = {
             if(helpers.getLocalStorage("currentPage")){
                 pageID = helpers.getLocalStorage("currentPage")
             }
-            console.log("loading", pageID)
+            
             app.initLayout(pageID);
 
             //
@@ -1104,13 +1124,12 @@ var app = {
 
         $(".dynamicWidgets .column").each(function(){
             if($(this).find(".portlet").length>1){
-                console.log("double");
+                
                 let $empty = $(".dynamicWidgets .column.empty");
                 
                 
                 let $node =$(this).find(".portlet:nth-child(" + $(this).find(".portlet").length + ")")
-                console.log("nodes", $(this).find(".portlet").length, $node);
-                
+               
                 $node.detach().appendTo($empty);
                 $empty.removeClass("empty");
             }

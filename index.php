@@ -179,7 +179,7 @@ var site = {
 }
 
 var layout = [
-    { name: "row0", contents: ["Good", "Happy", "Instagram","BibleVOD", "AM","Epic","Todo", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "NineGag",  "CSSTricks", "Photo", "Sheets" ]}
+    { name: "row0", contents: ["Good", "Happy", "Instagram","BibleVOD", "AM","Epic","Todo", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "Imgur",  "CSSTricks", "Photo", "Sheets" ]}
 ]
 
         let pageID = "dashboard";
@@ -202,7 +202,7 @@ var layout = [
         
     </script>
 
-    <script src="dist/js/portal.js?v=17"></script>
+    <script src="dist/js/portal.js?v=21"></script>
     
     <script src="dist/js/main.min.js"></script>
     

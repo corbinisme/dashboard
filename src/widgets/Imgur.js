@@ -11,6 +11,7 @@ var Imgur = {
     meta: {
         column: "col-lg-4 col-md-6"
     },
+    template: "carousel",
     state: {
       size: 500,
       mbx: null,
@@ -20,20 +21,10 @@ var Imgur = {
       max: 1,
       total: 10,
       dom: null,
+      currentData: [],
       header: {
           items: [
-             {
-                 type: "a",
-                 text: "<i class='fa fa-chevron-left'></i>",
-                 classNames: "rss_prev btn btn-default btn-sm btn-outline-secondary",
-                 link: "javascript:Imgur.rssFetch('prev')"
-             },
-			{
-			    type: "a",
-			    text: "<i class='fa fa-chevron-right'></i>",
-			    classNames: "rss_next btn btn-default btn-outline-secondary btn-sm",
-			    link: "javascript:Imgur.rssFetch('next')"
-			},
+             
           ]
       },
       rss: {
@@ -71,7 +62,6 @@ var Imgur = {
         }
         Imgur.state.start = newVal;
         Imgur.state.stop = newVal + interval;
-        console.log("start", Imgur.state.start);
         Imgur.render();
 
     },
@@ -94,19 +84,24 @@ var Imgur = {
     },
    render: function() {
 
-          var node = $(Imgur.state.dom);
-          $(node).html("<i class='fa fa-spinner fa-spin'></i>");
+          var $node = $(Imgur.state.dom);
+          //$(node).html("<i class='fa fa-spinner fa-spin'></i>");
+          /*
           var rss = "";
           var $rss = $(document.createElement("div"));
           var $ul = $(document.createElement("ul"));
           $ul.addClass("rss_list");
+          */
+         
+        
+          let tempState = [];
 
             $.ajax({
                 url: API_Imgur,
                 success: function (xml) {
 
-                    console.log(xml);
-                    let tempState = [];
+
+                    
                     let parser = new DOMParser();
                     let xmlDoc = parser.parseFromString(xml, "text/xml");
 
@@ -115,36 +110,40 @@ var Imgur = {
                     var max = state.rssParams.length;
                     $(xml).find("item").each(function (idx, el) {
                         
+                        console.log("imgur item", el)
                         var zeroIndex = idx +1;
-                        if (zeroIndex >= start && zeroIndex < stop) {
-                            let title = $(el).find("title").text()
-                            let description = $(el).find("description").html()
-                            //description = description.replace("<![CDATA[", "").replace("]]>", "").replace("]]&gt;", "");;
-                            //description = description.substring(3, description.indexOf("</p>"));
+                        
+                        let title = $(el).find("title").text()
+                        let description = $(el).find("description").html()
+                        //description = description.replace("<![CDATA[", "").replace("]]>", "").replace("]]&gt;", "");;
+                        //description = description.substring(3, description.indexOf("</p>"));
 
-                            let date = el.getElementsByTagName("pubDate")[0].innerHTML;
-                            let link = el.getElementsByTagName("guid")[0].innerHTML;
-                            let image = "";
-                            el.childNodes.forEach(function (ele, indx) {
-                                if (ele.nodeName.toLowerCase().indexOf("content") > -1) {
-                                    image = $(ele).find("img").attr("src")
-                                }
-                            });
+                        let date = el.getElementsByTagName("pubDate")[0].innerHTML;
+                        let link = el.getElementsByTagName("guid")[0].innerHTML;
+                        let image = "";
+                        el.childNodes.forEach(function (ele, indx) {
+                            if (ele.nodeName.toLowerCase().indexOf("content") > -1) {
+                                image = $(ele).find("img").attr("src")
+                            }
+                        });
 
-                            let temp = {
-                                title: title,
-                                key: idx,
-                                description: htmlDecode(description),
-                                date: date,
-                                link: link,
-                                image: image
-                            };
+                        let temp = {
+                            title: title,
+                            key: idx,
+                            description: htmlDecode(description),
+                            date: date,
+                            link: link,
+                            image: image
+                        };
 
-                            tempState.push(temp);
-                        }
+                        tempState.push(temp);
+                        
+
+                        
 
                     });
-
+                    Imgur.state.currentData = tempState;
+                    /*
                     tempState.forEach(function (el) {
                         var $item = $(document.createElement("li"));
                         $item.addClass("item");
@@ -159,7 +158,18 @@ var Imgur = {
                     if (Imgur.state.height) {
                         //$(node).height(News.state.height)
                     }
-                    return $rss.html();
+                    */
+
+                    console.log("imgur state", Imgur.state.currentData)
+
+                    let stringy = app.widgetLayouts.carousel(Imgur.state.currentData, {
+                        title: "Imgur",
+                        show: 3, 
+                        fields: ["title", "description", "link"]
+                    })
+                    $node.html(stringy);
+
+                    return $node.html();
                 },
                 error: function (e) {
                     console.log("error", item, $rss, $ul);
