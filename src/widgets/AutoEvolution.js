@@ -50,7 +50,7 @@ var AutoEvolution = {
 
                 $(xml).find("item").each(function (idx, el) {
                     let temp = {};
-                    console.log($(this).children())
+
                     temp.title = $(this).find("title").text();
                     temp.guid = $(this).find("guid").text();
                     temp.description = "Wee";

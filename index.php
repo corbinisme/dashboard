@@ -202,7 +202,7 @@ var layout = [
         
     </script>
 
-    <script src="dist/js/portal.js?v=21"></script>
+    <script src="dist/js/portal.js?v=26"></script>
     
     <script src="dist/js/main.min.js"></script>
     
