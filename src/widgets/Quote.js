@@ -36,7 +36,7 @@ var Quote = {
         return "<div class='quote'></div>";
     },
     init: function (node) {
-        console.log("quote here")
+
         Quote.state.dom = node;
         Quote.bindings();
         Quote.getData();

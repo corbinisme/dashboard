@@ -1,4 +1,4 @@
-const API_CorbinBlog = 'https://corbinrose.com/blog/feed/';
+const API_CorbinBlog = 'https://corbinrose.com/blog/wp-json/wp/v2/posts?_embed';
 var CorbinBlog = {
     meta: {
         column: "col-lg-4 col-md-6"
@@ -10,8 +10,8 @@ var CorbinBlog = {
       size: 500,
       dom: null,
       start: 1,
-      stop: 4,
-      max: 3,
+      stop: 3,
+      max: 2,
       header: {
           items: [
              {
@@ -44,15 +44,49 @@ var CorbinBlog = {
     
     getData: function () {
 
+        $.ajax({
+            url: this.url,
+            dataType: "json",
+            success: function (json) {
+                let ret = [];
+
+                json.forEach(function(item){
+
+                    let desc = document.createElement("div");
+                    desc.innerHTML = item.excerpt.rendered;
+                    desc.querySelector("img").remove();
+                    let temp = {
+                        title: item.title.rendered,
+                        guid: item.link,
+                        description: desc.innerHTML,
+                        image: item["_embedded"]['wp:featuredmedia'][0].source_url
+                    };
+
+                    ret.push(temp);
+                })
+
+              
+                CorbinBlog.state.currentData = ret;
+
+
+                CorbinBlog.render();
+                app.initSwipers();
+            }
+        });
+
+        /*
         app.dataTemplates.rss({
             url: this.url, 
             fields: "all",
             title: this.title
         });   
+        */
+       
     },
    
    render: function() {
 
+    
         var node = $(CorbinBlog.state.dom);
         
         let stringy = app.widgetLayouts.carousel(CorbinBlog.state.currentData, {
