@@ -196,7 +196,7 @@ let layoutTemplates = [
     {name: "dashboard", page: "dashboard", desc: "Default widgets saving space", code:  ["Quote", "Good", "Happy", "Fun", "Dadjokes", "BibleVOD", "AM","Epic", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "Cheezeburger",  "CSSTricks", "Photo", "PhotoNatgeo",   "PhotoNasa", "News", "Todo", "Instagram", "Facts", "DailyFacts", "GoodNewsHuff", "Buzzfeed", "HealthGazette","ExcellentTown", "BeautifulMess", "DailyGood", "Icr", "Lifehacker" ]},
     {name:"good", page: "good", desc: "", code: ["Quote", "Good", "Happy", "BibleVOD", "CleanMemes", "GoodNewsNetwork",  "SunnySkies", "Positive", "Godtube", "BibleTrivia", "DailyGood",  "TotesAcorbs|col-sm-6","CorbinBlog|col-sm-6", "ChristianHeadlines", "Advice", "FoxGood" ]},
     {name:"learn", page: "learn", desc: "", code: ["MakeUseOf|col-sm-12","Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr",    "DevTo", "PhotoNasa",  "HealthGazette|col-sm-4", "ExcellentTown|col-sm-4", "CSSTricks", "AM", "Britannica", "Hackaday"]},
-    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "Cheezeburger", "Todo|col-sm-4", "BoredPanda|col-sm-12", "BabyGoats|col-sm-6", "TinyHomes|col-sm-6", "Buzzfeed", "Epic", "Madlib|col-sm-4", "PhotoNatgeo", "AutoEvolution"]},
+    {name:"funny", page: "funny", desc: "", code: ["Dadjokes", "Cheezeburger", "Engrish", "BoredPanda|col-sm-12", "BabyGoats|col-sm-6", "TinyHomes|col-sm-6", "Buzzfeed", "Epic", "Madlib|col-sm-4", "PhotoNatgeo", "AutoEvolution", "Todo|col-sm-4"]},
 ];
 
 const allWidgets = ["Good", "Happy", "Instagram","BibleVOD", "AM","Epic","Todo", "BoredPanda", "Colossal", "Godtube","ChloeCorner", "Zoo", "Cheezeburger",  "CSSTricks", "Photo", "Sheets"];
