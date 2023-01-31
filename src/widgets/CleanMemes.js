@@ -58,7 +58,7 @@ var CleanMemes = {
 
    render: function() {
         var node = $(CleanMemes.state.dom);
-    
+        
         let stringy = app.widgetLayouts.carousel(CleanMemes.state.currentData, {
             title: "CleanMemes",
             show: 3, 

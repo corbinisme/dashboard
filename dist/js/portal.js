@@ -503,7 +503,11 @@ var app = {
                                 if (ele.nodeName.toLowerCase().indexOf("content:") > -1) {
                                     
                                     var $temp = $(document.createElement("div"));
-                                    $temp.html(ele.innerHTML);
+                                    
+                                    let htmlcontent = ele.innerHTML;
+                                    htmlcontent = htmlcontent.replace("<p-->", "<p>")
+
+                                    $temp.html(htmlcontent);
                                     var $img = $temp.find("img");
                                     if($img){
                                         image = $img.attr("src");
@@ -613,7 +617,9 @@ var app = {
                        //search description
                        let temp = el.description;
                        let count = 0;
-                       $(temp).find("img").each(function(){
+                       let $tempdiv = $(document.createElement("div"));
+                       $tempdiv.html(temp)
+                       $tempdiv.find("img").each(function(){
                            if(count==0){
                             image = $(this).attr("src");
                            }

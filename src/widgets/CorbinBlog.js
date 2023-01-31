@@ -54,7 +54,9 @@ var CorbinBlog = {
 
                     let desc = document.createElement("div");
                     desc.innerHTML = item.excerpt.rendered;
+                    if(desc.querySelector("img")){
                     desc.querySelector("img").remove();
+                    }
                     let temp = {
                         title: item.title.rendered,
                         guid: item.link,
@@ -65,7 +67,7 @@ var CorbinBlog = {
                     ret.push(temp);
                 })
 
-              
+
                 CorbinBlog.state.currentData = ret;
 
 
