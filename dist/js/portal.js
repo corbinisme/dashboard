@@ -201,6 +201,7 @@ let layoutTemplates = [
         "BibleVOD", 
         "CleanMemes",
         //"GoodNewsNetwork",
+        "FoxGood",
         "SunnySkies", 
         "Positive", 
         "Godtube", 
@@ -209,7 +210,7 @@ let layoutTemplates = [
         "TotesAcorbs|col-sm-6",
         "CorbinBlog|col-sm-6", 
         "ChristianHeadlines", 
-        "FoxGood",
+        
         "Advice"
     ]},
     {name:"learn", page: "learn", desc: "", code: ["MakeUseOf|col-sm-12","Colossal", "Lifehacker|col-sm-6", "DailyFacts",  "WordOfDay", "Icr",    "DevTo", "PhotoNasa",  "HealthGazette|col-sm-4", "ExcellentTown|col-sm-4", "CSSTricks", "AM", "Britannica", "Hackaday"]},
@@ -582,6 +583,83 @@ var app = {
         }
     },
     widgetLayouts: {
+        carouselDesc:  function(data, options){
+            console.log("desc", data, options)
+            let title = options.title;
+            let jstitle = title.toLowerCase();
+            let widgetObj = window[title];
+
+            let start = widgetObj.state.start;
+            let stop = widgetObj.state.stop;
+            // get slides per view
+            let slidesper = stop-start;
+            let $wrapper = $(document.createElement("div"));
+            let $swiper = $(document.createElement("div"));
+            $swiper.addClass("swiper").addClass(jstitle);
+            $swiper.attr("data-slidesper", slidesper);
+            $swiper.attr("data-title", jstitle)
+
+            let $swiperWapper = $(document.createElement("div"));
+            $swiperWapper.addClass("swiper-wrapper")
+            
+            window[title].state.currentData.forEach(function (el, idx) {
+                let $swiperSlide = $(document.createElement("div"));
+
+                $swiperSlide.addClass("swiper-slide");
+                let img = "";
+
+                var zeroIndex = idx+1;
+                //if (zeroIndex >= start && zeroIndex < stop) {
+                   var $item = $(document.createElement("div"));
+
+                   let image = "";
+                   if(el.image && el.image!=""){
+                       image = el.image;
+                   } else {
+                       //search description
+                       let temp = el.description;
+                       let count = 0;
+                       let $tempdiv = $(document.createElement("div"));
+                       $tempdiv.html(temp)
+                       $tempdiv.find("img").each(function(){
+                           if(count==0){
+                            image = $(this).attr("src");
+                           }
+                           count++;
+                       });
+
+                       if(image ==""){
+                           // everything failed. just set something random
+                           //image = "https://picsum.photos/400/" + (idx + 200);
+
+                       }
+                   }
+
+                   let content = el['content:encoded'];
+                   $item.addClass("swiper-content");
+                   var temp = `<span class='rss_image_wrap'>
+                        <img class='rss_image' src='${image}' alt='rss item featured' />
+                    </span>
+                    <span class='rss_heading'>
+                        <a href='${el.guid}' target='_blank'>${el.title}</a></span>
+                    <span class='rss_content'>${content}</span>`;
+                   $item.html(temp);
+                   $swiperSlide.append($item);
+                   $swiperWapper.append($swiperSlide);
+                //}
+               
+           });
+           
+           $swiper.append($swiperWapper);
+           $wrapper.append($swiper);
+
+           $wrapper.append(`<div class="swiper-pagination ${jstitle}"></div>
+           <div class="swiper-button-prev ${jstitle}"></div>
+           <div class="swiper-button-next ${jstitle}"></div>
+           <div class="swiper-scrollbar ${jstitle}"></div>`);
+
+           return $wrapper.html();
+        },
         carousel: function(data, options){
             let title = options.title;
             let jstitle = title.toLowerCase();
@@ -780,6 +858,9 @@ var app = {
         },
     },
     headerTemplates: {
+        carouselDesc: [
+
+        ],
         carousel: [
             {
                 type: "a",
@@ -795,18 +876,7 @@ var app = {
             },
         ],
         photocarousel: [
-            {
-                type: "a",
-                text: "<i class='fa fa-chevron-left'></i>",
-                classNames: "rss_prev rss_btn btn btn-default btn-sm btn-outline-secondary",
-                link: "javascript:;"
-            },
-            {
-                type: "a",
-                text: "<i class='fa fa-chevron-right'></i>",
-                classNames: "rss_next rss_btn btn btn-default btn-outline-secondary btn-sm",
-                link: "javascript:;"
-            },
+            
         ],
     },
     removeCdata: function(string){

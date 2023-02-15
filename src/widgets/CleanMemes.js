@@ -3,7 +3,7 @@ var CleanMemes = {
         column: "col-lg-4 col-md-4"
     },
     title: "CleanMemes",
-    template: "photocarousel",
+    template: "carouselDesc",
     url: 'https://cleanmemes.com/feed/',
     state: {
       size: 500,
@@ -59,7 +59,7 @@ var CleanMemes = {
    render: function() {
         var node = $(CleanMemes.state.dom);
         
-        let stringy = app.widgetLayouts.carousel(CleanMemes.state.currentData, {
+        let stringy = app.widgetLayouts.carouselDesc(CleanMemes.state.currentData, {
             title: "CleanMemes",
             show: 3, 
             fields: ["title", "description", "link"]
